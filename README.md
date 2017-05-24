@@ -1,2 +1,2 @@
 # SouthCoast
-Content from the South Coast User Group Meetups
+Content from the UK South Coast PowerShell User Group Meetups
