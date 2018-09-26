@@ -1,0 +1,6 @@
+The slides and my notes from my talk yesterday can now be found here: https://github.com/markwragg/Presentations
+
+The code I shared can be found here: https://github.com/markwragg/PowerShell-HashCopy
+
+and here:
+https://github.com/markwragg/PowerShell-ExampleModule
