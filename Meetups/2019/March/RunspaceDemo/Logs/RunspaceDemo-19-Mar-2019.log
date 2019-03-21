@@ -1,0 +1,140 @@
+19/03/2019 21:31:58 [19612] [10] Processing started on server NBLAPTOP
+19/03/2019 21:31:58 [19612] [10] Config file is .\Config\RSDemoEntities.json
+19/03/2019 21:31:58 [19612] [10] Output file is X:\Documents\Development\PowerShell\PowerShell Southampton UG\RunspaceDemo\Output\RunspaceDemo-19-Mar-2019.csv
+19/03/2019 21:31:59 [19612] [10] Runspace Pool throttled to 10 concurrent threads
+19/03/2019 21:31:59 [19612] [45] Job monitoring 192.168.78.11 on HOST01 has Thread ID 45 and will not repeat after 19/03/2019 21:32:58
+19/03/2019 21:31:59 [19612] [43] Job monitoring 192.168.78.12 on HOST01 has Thread ID 43 and will not repeat after 19/03/2019 21:32:58
+19/03/2019 21:31:59 [19612] [39] Job monitoring 192.168.78.13 on HOST02 has Thread ID 39 and will not repeat after 19/03/2019 21:32:58
+19/03/2019 21:31:59 [19612] [40] Job monitoring 192.168.78.14 on HOST02 has Thread ID 40 and will not repeat after 19/03/2019 21:32:58
+19/03/2019 21:32:00 [19612] [38] Job monitoring 192.168.78.15 on HOST03 has Thread ID 38 and will not repeat after 19/03/2019 21:32:58
+19/03/2019 21:32:00 [19612] [37] Job monitoring 192.168.78.16 on HOST03 has Thread ID 37 and will not repeat after 19/03/2019 21:32:58
+19/03/2019 21:32:01 [19612] [36] Job monitoring 192.168.78.17 on HOST04 has Thread ID 36 and will not repeat after 19/03/2019 21:32:58
+19/03/2019 21:32:01 [19612] [3] Job monitoring 192.168.78.18 on HOST04 has Thread ID 3 and will not repeat after 19/03/2019 21:32:58
+19/03/2019 21:32:02 [19612] [14] Job monitoring 192.168.78.19 on HOST05 has Thread ID 14 and will not repeat after 19/03/2019 21:32:58
+19/03/2019 21:32:02 [19612] [13] Job monitoring 192.168.78.20 on HOST05 has Thread ID 13 and will not repeat after 19/03/2019 21:32:58
+19/03/2019 21:32:02 [19612] [10] There are 10 remaining jobs
+19/03/2019 21:32:12 [19612] [39] Latency for 192.168.78.13 (HOST02) is 0 mS
+19/03/2019 21:32:12 [19612] [40] Latency for 192.168.78.14 (HOST02) is 2 mS
+19/03/2019 21:32:12 [19612] [36] Latency for 192.168.78.17 (HOST04) is 0 mS
+19/03/2019 21:32:12 [19612] [13] Latency for 192.168.78.20 (HOST05) is 1 mS
+19/03/2019 21:32:12 [19612] [38] Latency for 192.168.78.15 (HOST03) is 0 mS
+19/03/2019 21:32:14 [19612] [40] Port 3389 on 192.168.78.14 (HOST02) listening
+19/03/2019 21:32:14 [19612] [39] Port 3389 on 192.168.78.13 (HOST02) listening
+19/03/2019 21:32:15 [19612] [13] Port 3389 on 192.168.78.20 (HOST05) listening
+19/03/2019 21:32:15 [19612] [38] Port 3389 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:16 [19612] [45] Latency for 192.168.78.11 (HOST01) is 0 mS
+19/03/2019 21:32:16 [19612] [43] Latency for 192.168.78.12 (HOST01) is 0 mS
+19/03/2019 21:32:17 [19612] [37] Latency for 192.168.78.16 (HOST03) is 1 mS
+19/03/2019 21:32:17 [19612] [3] Latency for 192.168.78.18 (HOST04) is 0 mS
+19/03/2019 21:32:17 [19612] [40] Port 445 on 192.168.78.14 (HOST02) listening
+19/03/2019 21:32:17 [19612] [14] Latency for 192.168.78.19 (HOST05) is 0 mS
+19/03/2019 21:32:17 [19612] [13] Port 445 on 192.168.78.20 (HOST05) listening
+19/03/2019 21:32:18 [19612] [38] Port 445 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:18 [19612] [36] Port 3389 on 192.168.78.17 (HOST04) listening
+19/03/2019 21:32:19 [19612] [40] Latency for 192.168.78.14 (HOST02) is 0 mS
+19/03/2019 21:32:19 [19612] [14] Port 3389 on 192.168.78.19 (HOST05) listening
+19/03/2019 21:32:19 [19612] [38] Latency for 192.168.78.15 (HOST03) is 0 mS
+19/03/2019 21:32:19 [19612] [36] Port 445 on 192.168.78.17 (HOST04) listening
+19/03/2019 21:32:20 [19612] [38] Port 3389 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:20 [19612] [39] Port 445 on 192.168.78.13 (HOST02) listening
+19/03/2019 21:32:20 [19612] [36] Latency for 192.168.78.17 (HOST04) is 1 mS
+19/03/2019 21:32:22 [19612] [39] Latency for 192.168.78.13 (HOST02) is 0 mS
+19/03/2019 21:32:22 [19612] [43] Port 3389 on 192.168.78.12 (HOST01) listening
+19/03/2019 21:32:23 [19612] [37] Port 3389 on 192.168.78.16 (HOST03) listening
+19/03/2019 21:32:23 [19612] [3] Port 3389 on 192.168.78.18 (HOST04) listening
+19/03/2019 21:32:23 [19612] [13] Latency for 192.168.78.20 (HOST05) is 0 mS
+19/03/2019 21:32:23 [19612] [43] Port 445 on 192.168.78.12 (HOST01) listening
+19/03/2019 21:32:24 [19612] [40] Port 3389 on 192.168.78.14 (HOST02) listening
+19/03/2019 21:32:24 [19612] [14] Port 445 on 192.168.78.19 (HOST05) listening
+19/03/2019 21:32:26 [19612] [36] Port 3389 on 192.168.78.17 (HOST04) listening
+19/03/2019 21:32:26 [19612] [45] Port 3389 on 192.168.78.11 (HOST01) listening
+19/03/2019 21:32:27 [19612] [39] Port 3389 on 192.168.78.13 (HOST02) listening
+19/03/2019 21:32:28 [19612] [39] Port 445 on 192.168.78.13 (HOST02) listening
+19/03/2019 21:32:28 [19612] [3] Port 445 on 192.168.78.18 (HOST04) listening
+19/03/2019 21:32:29 [19612] [13] Port 3389 on 192.168.78.20 (HOST05) listening
+19/03/2019 21:32:30 [19612] [3] Latency for 192.168.78.18 (HOST04) is 0 mS
+19/03/2019 21:32:30 [19612] [40] Port 445 on 192.168.78.14 (HOST02) listening
+19/03/2019 21:32:31 [19612] [38] Port 445 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:31 [19612] [13] Port 445 on 192.168.78.20 (HOST05) listening
+19/03/2019 21:32:31 [19612] [14] Latency for 192.168.78.19 (HOST05) is 0 mS
+19/03/2019 21:32:32 [19612] [45] Port 445 on 192.168.78.11 (HOST01) listening
+19/03/2019 21:32:32 [19612] [45] Job monitoring 192.168.78.11 on HOST01 ending
+19/03/2019 21:32:32 [19612] [3] Port 3389 on 192.168.78.18 (HOST04) listening
+19/03/2019 21:32:32 [19612] [10] There are 9 remaining jobs
+19/03/2019 21:32:32 [19612] [38] Latency for 192.168.78.15 (HOST03) is 0 mS
+19/03/2019 21:32:32 [19612] [13] Latency for 192.168.78.20 (HOST05) is 0 mS
+19/03/2019 21:32:33 [19612] [37] Port 445 on 192.168.78.16 (HOST03) listening
+19/03/2019 21:32:33 [19612] [37] Job monitoring 192.168.78.16 on HOST03 ending
+19/03/2019 21:32:33 [19612] [10] There are 8 remaining jobs
+19/03/2019 21:32:33 [19612] [3] Port 445 on 192.168.78.18 (HOST04) listening
+19/03/2019 21:32:33 [19612] [43] Latency for 192.168.78.12 (HOST01) is 0 mS
+19/03/2019 21:32:33 [19612] [39] Latency for 192.168.78.13 (HOST02) is 0 mS
+19/03/2019 21:32:34 [19612] [38] Port 3389 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:35 [19612] [3] Latency for 192.168.78.18 (HOST04) is 1 mS
+19/03/2019 21:32:35 [19612] [39] Port 3389 on 192.168.78.13 (HOST02) listening
+19/03/2019 21:32:35 [19612] [38] Port 445 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:35 [19612] [36] Port 445 on 192.168.78.17 (HOST04) listening
+19/03/2019 21:32:36 [19612] [3] Port 3389 on 192.168.78.18 (HOST04) listening
+19/03/2019 21:32:36 [19612] [39] Port 445 on 192.168.78.13 (HOST02) listening
+19/03/2019 21:32:36 [19612] [38] Latency for 192.168.78.15 (HOST03) is 0 mS
+19/03/2019 21:32:36 [19612] [40] Latency for 192.168.78.14 (HOST02) is 0 mS
+19/03/2019 21:32:36 [19612] [36] Latency for 192.168.78.17 (HOST04) is 0 mS
+19/03/2019 21:32:36 [19612] [14] Port 3389 on 192.168.78.19 (HOST05) listening
+19/03/2019 21:32:37 [19612] [3] Port 445 on 192.168.78.18 (HOST04) listening
+19/03/2019 21:32:37 [19612] [39] Latency for 192.168.78.13 (HOST02) is 0 mS
+19/03/2019 21:32:38 [19612] [38] Port 3389 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:38 [19612] [40] Port 3389 on 192.168.78.14 (HOST02) listening
+19/03/2019 21:32:38 [19612] [14] Port 445 on 192.168.78.19 (HOST05) listening
+19/03/2019 21:32:38 [19612] [13] Port 3389 on 192.168.78.20 (HOST05) listening
+19/03/2019 21:32:39 [19612] [39] Port 3389 on 192.168.78.13 (HOST02) listening
+19/03/2019 21:32:39 [19612] [43] Port 3389 on 192.168.78.12 (HOST01) listening
+19/03/2019 21:32:39 [19612] [38] Port 445 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:39 [19612] [14] Latency for 192.168.78.19 (HOST05) is 0 mS
+19/03/2019 21:32:40 [19612] [13] Port 445 on 192.168.78.20 (HOST05) listening
+19/03/2019 21:32:41 [19612] [43] Port 445 on 192.168.78.12 (HOST01) listening
+19/03/2019 21:32:41 [19612] [43] Job monitoring 192.168.78.12 on HOST01 ending
+19/03/2019 21:32:41 [19612] [38] Latency for 192.168.78.15 (HOST03) is 0 mS
+19/03/2019 21:32:41 [19612] [14] Port 3389 on 192.168.78.19 (HOST05) listening
+19/03/2019 21:32:41 [19612] [13] Latency for 192.168.78.20 (HOST05) is 0 mS
+19/03/2019 21:32:41 [19612] [10] There are 7 remaining jobs
+19/03/2019 21:32:42 [19612] [36] Port 3389 on 192.168.78.17 (HOST04) listening
+19/03/2019 21:32:42 [19612] [13] Port 3389 on 192.168.78.20 (HOST05) listening
+19/03/2019 21:32:42 [19612] [3] Latency for 192.168.78.18 (HOST04) is 0 mS
+19/03/2019 21:32:43 [19612] [40] Port 445 on 192.168.78.14 (HOST02) listening
+19/03/2019 21:32:44 [19612] [39] Port 445 on 192.168.78.13 (HOST02) listening
+19/03/2019 21:32:46 [19612] [38] Port 3389 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:46 [19612] [14] Port 445 on 192.168.78.19 (HOST05) listening
+19/03/2019 21:32:47 [19612] [36] Port 445 on 192.168.78.17 (HOST04) listening
+19/03/2019 21:32:47 [19612] [36] Job monitoring 192.168.78.17 on HOST04 ending
+19/03/2019 21:32:47 [19612] [10] There are 6 remaining jobs
+19/03/2019 21:32:48 [19612] [13] Port 445 on 192.168.78.20 (HOST05) listening
+19/03/2019 21:32:48 [19612] [38] Port 445 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:48 [19612] [14] Latency for 192.168.78.19 (HOST05) is 0 mS
+19/03/2019 21:32:48 [19612] [3] Port 3389 on 192.168.78.18 (HOST04) listening
+19/03/2019 21:32:49 [19612] [39] Latency for 192.168.78.13 (HOST02) is 0 mS
+19/03/2019 21:32:49 [19612] [38] Latency for 192.168.78.15 (HOST03) is 0 mS
+19/03/2019 21:32:49 [19612] [3] Port 445 on 192.168.78.18 (HOST04) listening
+19/03/2019 21:32:49 [19612] [3] Job monitoring 192.168.78.18 on HOST04 ending
+19/03/2019 21:32:49 [19612] [10] There are 5 remaining jobs
+19/03/2019 21:32:50 [19612] [39] Port 3389 on 192.168.78.13 (HOST02) listening
+19/03/2019 21:32:51 [19612] [39] Port 445 on 192.168.78.13 (HOST02) listening
+19/03/2019 21:32:51 [19612] [39] Job monitoring 192.168.78.13 on HOST02 ending
+19/03/2019 21:32:51 [19612] [10] There are 4 remaining jobs
+19/03/2019 21:32:52 [19612] [40] Latency for 192.168.78.14 (HOST02) is 0 mS
+19/03/2019 21:32:53 [19612] [14] Port 3389 on 192.168.78.19 (HOST05) listening
+19/03/2019 21:32:53 [19612] [13] Latency for 192.168.78.20 (HOST05) is 0 mS
+19/03/2019 21:32:54 [19612] [40] Port 3389 on 192.168.78.14 (HOST02) listening
+19/03/2019 21:32:54 [19612] [38] Port 3389 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:55 [19612] [13] Port 3389 on 192.168.78.20 (HOST05) listening
+19/03/2019 21:32:55 [19612] [40] Port 445 on 192.168.78.14 (HOST02) listening
+19/03/2019 21:32:55 [19612] [40] Job monitoring 192.168.78.14 on HOST02 ending
+19/03/2019 21:32:55 [19612] [10] There are 3 remaining jobs
+19/03/2019 21:32:56 [19612] [38] Port 445 on 192.168.78.15 (HOST03) listening
+19/03/2019 21:32:56 [19612] [38] Job monitoring 192.168.78.15 on HOST03 ending
+19/03/2019 21:32:56 [19612] [10] There are 2 remaining jobs
+19/03/2019 21:32:59 [19612] [14] Port 445 on 192.168.78.19 (HOST05) listening
+19/03/2019 21:32:59 [19612] [14] Job monitoring 192.168.78.19 on HOST05 ending
+19/03/2019 21:32:59 [19612] [10] There are 1 remaining jobs
+19/03/2019 21:33:04 [19612] [13] Port 445 on 192.168.78.20 (HOST05) listening
+19/03/2019 21:33:04 [19612] [13] Job monitoring 192.168.78.20 on HOST05 ending
+19/03/2019 21:33:04 [19612] [10] Processing completed
