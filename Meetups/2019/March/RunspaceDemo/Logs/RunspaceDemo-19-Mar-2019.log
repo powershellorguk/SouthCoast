@@ -1,6 +1,6 @@
-19/03/2019 21:31:58 [19612] [10] Processing started on server NBLAPTOP
-19/03/2019 21:31:58 [19612] [10] Config file is .\Config\RSDemoEntities.json
-19/03/2019 21:31:58 [19612] [10] Output file is X:\Documents\Development\PowerShell\PowerShell Southampton UG\RunspaceDemo\Output\RunspaceDemo-19-Mar-2019.csv
+19/03/2019 21:31:58 [19612] [10] Processing started on server SERVER01
+19/03/2019 21:31:58 [19612] [10] Config file is C:\Scripts\RunspaceDemo\Config\RSDemoEntities.json
+19/03/2019 21:31:58 [19612] [10] Output file is C:\Scripts\RunspaceDemo\Output\RunspaceDemo-19-Mar-2019.csv
 19/03/2019 21:31:59 [19612] [10] Runspace Pool throttled to 10 concurrent threads
 19/03/2019 21:31:59 [19612] [45] Job monitoring 192.168.78.11 on HOST01 has Thread ID 45 and will not repeat after 19/03/2019 21:32:58
 19/03/2019 21:31:59 [19612] [43] Job monitoring 192.168.78.12 on HOST01 has Thread ID 43 and will not repeat after 19/03/2019 21:32:58
