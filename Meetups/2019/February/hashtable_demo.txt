@@ -1,0 +1,223 @@
+#region set empty hastable
+    $jedicouncil = @{}
+#endregion
+
+#region setup hashtable with some data
+    $JediCouncil = @{Jedi1="Yoda"; Jedi2="Mace Windu"; Jedi3="Plo Koon"; Jedi4="Yaddle"; Jedi5="Even Piell"}
+#endregion
+
+#region ordered table
+    $JediCouncil = [ordered]@{Jedi1="Yoda"; Jedi2="Mace Windu"; Jedi3="Plo Koon"; Jedi4="Yaddle"; Jedi5="Even Piell"}
+#endregion
+
+#region Display Keys\values
+    $jedicouncil.keys
+    $jedicouncil.Values
+#endregion
+
+#region Hashtable memebers
+    $jedicouncil |gm
+#endregion
+
+#region Adding
+    $jedicouncil.Add("jedi6","jonathanmedd")
+    $jediNumber = "jedi7"
+    $jediname = "Emad"
+    $jedicouncil.Add($jediNumber,$jediname)
+    $jedicouncil
+#endregion
+
+#region and Removing Keys and Values
+    $jedicouncil.Remove("jedi6")
+    $jedicouncil
+    [pscustomobject]$JediCouncil
+#endregion
+
+#region nested hastable
+    $Jedipeople = @{
+        Yoda = @{
+            age  = 36000
+            Colour = 'Green'
+        }
+        Emad = @{
+            age  = 90000
+            Colour = 'Red with hint of Yellow'
+        }
+    }
+    $Jedipeople
+    $Jedipeople.emad
+#endregion
+
+#region nested hashtable
+    $Jedipeople = @{
+        Yoda = @{
+            age  = 36000
+            Colour = 'Green'
+        }
+        Emad = @{
+            age  = 90000
+            Colour = 'Red with hint of Yellow'
+        }
+
+        "Mace Windu" = @{
+            age  = 90000
+            Colour = 'Yellow'
+        }
+
+        "Plo Koon" = @{
+            age  = 9045400
+            Colour = 'Unkown'
+        }
+
+        "Yaddle" = @{
+            age  = 000000005
+            Colour = 'Miserable Green'
+        }
+
+        "Even Piell" = @{
+            age  = 30000
+            Colour = 'Sort of Red Whitish'
+        }
+    }
+
+    $Jedipeople
+    $Jedipeople.emad
+    $Jedipeople.Yoda.age
+#endregion
+
+#region Setup SQL default settings
+    $SQLServer_InstallDefault = @{
+    InstanceName ="MSSQLSERVER"
+    SourcePath = "C:\SQLinstall_source"
+    Features = "SQLEngine,FullText"
+    SQLCollation = "Latin1_General_CI_AS"
+    InstallSharedDir = "C:\Program Files\Microsoft SQL Server"
+    InstallSharedWOWDir = "C:\Program Files (x86)\Microsoft SQL Server"
+    InstanceDir = "C:\Program Files\Microsoft SQL Server"
+    InstallSQLDataDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
+    SQLUserDBDir = "C:\SQL\UserData\"
+    SQLUserDBLogDir = "C:\SQL\UserDataLogs\"
+    SQLTempDBDir = "C:\SQL\TempDB\"
+    SQLTempDBLogDir = "C:\SQL\TempDBLog"
+    SQLBackupDir = "C:\SQL\Backup"
+    SecurityMode = "SQL"
+    }
+
+#endregion
+
+#region Get SQL default setting
+    $SQLServer_InstallDefault
+#endregion
+
+#region Create SQL installation setting to be consumed by DSC should they be different from the default
+    $SQLServer_Install = @{}
+#endregion
+
+#region Read (set) new configuration
+    $SQLServer_Install = @{"InstanceName"="JediDatabase"}
+    $SQLServer_Install = @{"InstanceName"="JediDatabase";"SQLTempDBDir"="C:\"}
+#endregion
+
+#region Display
+    $SQLServer_Install
+#endregion
+
+#region Magic
+    $SQLServer_InstallDefault.Keys | Where-Object{ $_ -notin $SQLServer_Install.Keys} | ForEach-Object{
+        $SQLServer_Install += @{ $_ = ($SQLServer_InstallDefault.$_)}
+    }
+#endregion
+
+#region Display the default hashtable setting
+    $SQLServer_InstallDefault
+#endregion
+
+#region Display the new hashtable that contain the required settings
+    $SQLServer_Install
+#endregion
+
+#region Display DSC configuration
+    SQLSetup InstallSqlServer {
+    InstanceName = $SQLServer_Install.InstanceName #"MSSQLSERVER"
+    SourcePath = $SQLServer_Install.SourcePath #$SQLSource
+    Features = $SQLServer_Install.Features #$Node.Features #"SQLEngine,FullText"
+    DependsOn = "[WindowsFeature]installdotNet35"
+    ...
+    }
+#endregion
+
+
+#region Splatting
+
+#region simple splatting
+    New-Item C:\Local\Powershell2000.txt -Type File
+    $HashArgs = @{
+        Path = "c:\local\powershell2000.txt"
+        Destination = "c:\local\test2.txt"
+        WhatIf = $true
+    }
+
+    Copy-Item @HashArgs
+#endregion
+
+#region Very long comamnd
+    setup.exe /QS /ACTION=Install /FEATURES=SQL /INSTANCENAME=MSSQLSERVER /SQLSVCACCOUNT="SomeDomain\SomeAccount" /SQLSVCPASSWORD="SomePawd" /AGTSVCACCOUNT="SomeDomain\SomeAccount" /AGTSVCPASSWORD="SomeOtherPwd" /RSSVCACCOUNT="SomeDomain\SomeAccount" /RSSVCPASSWORD="AnotherPawd" /SQLSYSADMINACCOUNTS="SomeDomain\SomeAccount", "SomeDomain\User1" /TCPENABLED=1 /IACCEPTSQLSERVERLICENSETERMS=1 /UPDATEENABLED=True /SECURITYMODE=SQL /SAPWD="StrongPwd" /SQLUSERDBDIR="C:\Data\" /SQLTEMPDBDIR="C:\TempDB\" /SQLTEMPDBLOGDIR="C:\TempDBLog" /SQLUSERDBLOGDIR="C:\DataLogs\" /SQLBACKUPDIR="C:\Backup\" /SQLCOLLATION="Latin1_General_CI_AS"
+
+    #region using splatting
+        $SqlArgs = @{
+            "/ACTION"="Install"
+            "/FEATURES"="SQL"
+            "/INSTANCENAME" = "MSSQLSERVER"
+            "/SQLSVCACCOUNT" = "SomeDomain\SomeAccount"
+            "/SQLSVCPASSWORD" = "SomePawd"
+            "/AGTSVCACCOUNT" = "SomeDomain\SomeAccount"
+            "/AGTSVCPASSWORD" ="SomeOtherPwd"
+            "/RSSVCACCOUNT" = "SomeDomain\SomeAccount"
+            "/RSSVCPASSWORD" = "AnotherPawd"
+            "/SQLSYSADMINACCOUNTS" = "SomeDomain\SomeAccount"
+            "/TCPENABLED" = "1"
+            "/IACCEPTSQLSERVERLICENSETERMS" = "1"
+            "/UPDATEENABLED" = "True"
+            "/SECURITYMODE" = "SQL"
+            "/SAPWD" = "StrongPwd"
+            "/SQLUSERDBDIR" = "C:\Data\"
+            "/SQLTEMPDBDIR" = "C:\TempDB\"
+            "/SQLTEMPDBLOGDIR" = "C:\TempDBLog"
+            "/SQLUSERDBLOGDIR" = "C:\DataLogs\"
+            "/SQLBACKUPDIR" = "C:\Backup\"
+            "/SQLCOLLATION" ="Latin1_General_CI_AS";
+        }
+
+        setup.exe /QS @SqlArgs
+        01983 200 114
+    #endregion
+#endregion
+
+#endregion
+
+
+#region another example
+
+    New-ADUser -Name "Test User" -GivenName "Test" -Surname "User" -DisplayName "Test User" -SamAccountName "TestUser" -UserPrincipalName "TestUser@lab.thinkpowershell.com" -AccountPassword (ConvertTo-SecureString "DemoPass1" -AsPlainText -Force) -Enabled $true -City "Minneapolis" -State "MN" -Path "ou=Users, ou=LAB, dc=lab, dc=thinkpowershell, dc=com"
+
+
+
+    $Params = @{
+        AccountPassword = (ConvertTo-SecureString "TestPassword1" -AsPlainText -Force);
+        City = "Minneapolis";
+        DisplayName = "Test User";
+        Enabled = $true;
+        GivenName = "Test";
+        Name = "Test User";
+        Path = "ou=Users, ou=LAB, dc=lab, dc=thinkpowershell, dc=com";
+        SamAccountName = "TestUser";
+        State = "MN";
+        Surname = "User";
+        UserPrincipalName = "TestUser@lab.thinkpowershell.com";
+    }
+
+    $Param
+
+    # New-ADUser @Params
+
+#endregion
