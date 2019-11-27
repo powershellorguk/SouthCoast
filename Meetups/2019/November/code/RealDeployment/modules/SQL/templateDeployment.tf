@@ -1,0 +1,28 @@
+resource "azurerm_template_deployment" "ArmDeployment" {
+  name                              = "ARM-${var.BaseName}-Deployment"
+  resource_group_name               = "${var.ResourceGroupName}"
+  template_body                     = "${file("${path.module}\\armTemplate_SqlFailOverGroup.json")}"
+  parameters {
+    "SqlAdmin_Username"             = "${var.SqlConfig["Username"]}"
+    "SqlAdmin_Password"             = "${var.SqlConfig["Password"]}"
+    "SqlServer_Primary"             = "sql-${lower(var.BaseName)}-1"
+    "Location_Primary"              = "${var.Location[0]}"
+    "SqlServer_Secondary"           = "sql-${lower(var.BaseName)}-2"
+    "Location_Secondary"            = "${var.Location[1]}"
+    "SqlFailOverGroup"              = "sql-${lower(var.BaseName)}-fg"
+    "LogsDb"                        = "DB-${var.BaseName}-${var.appslot["Primary"]}-Logs"
+    "ServicesDb"                    = "DB-${var.BaseName}-${var.appslot["Primary"]}-Services"
+    "ClientDb"                      = "DB-${var.BaseName}-${var.clientDBName[1]}-Client"
+    "LogsDbStaging"                 = "DB-${var.BaseName}-${var.appslot["Secondary"]}-Logs"
+    "ServicesDbStaging"             = "DB-${var.BaseName}-${var.appslot["Secondary"]}-Services"
+    "ClientDbStaging"               = "DB-${var.BaseName}-${var.clientDBName[0]}-Client"
+    "FirewallIpAddresses"           = "${var.AllowIpsInFirewalls}"
+    "Client_Database_Sku"           = "${var.DatabaseSkus["Client"]}"
+    "Services_Database_Sku"         = "${var.DatabaseSkus["Services"]}"
+    "Vanquis_Database_Sku"          = "${var.DatabaseSkus["Logs"]}"
+    "Tag_CostCode"                  = "${var.Tags["costcode"]}"
+    "Tag_Environment"               = "${var.Tags["environment"]}"   
+    "Tag_Product"                   = "${var.Tags["product"]}"    
+  }
+  deployment_mode                   = "Incremental"
+}
