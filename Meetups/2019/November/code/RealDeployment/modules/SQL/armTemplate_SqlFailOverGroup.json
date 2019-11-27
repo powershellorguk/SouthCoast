@@ -1,0 +1,269 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.1.0.2",
+    "parameters": {
+        "SqlAdmin_Username": {
+            "type": "string"
+        },
+        "SqlAdmin_Password": {
+            "type": "string"
+        },
+        "SqlServer_Primary": {
+            "type": "string"
+        },
+        "Location_Primary": {
+            "type": "string"
+        },
+        "SqlServer_Secondary": {
+            "type": "string"
+        },
+        "Location_Secondary": {
+            "type": "string"
+        },
+        "SqlFailOverGroup": {
+            "type": "string"
+        },
+        "LogsDb": {
+            "type": "string"
+        },
+        "ServicesDb": {
+            "type": "string"
+        },
+        "ClientDb": {
+            "type": "string"
+        },
+        "LogsDbStaging": {
+            "type": "string"
+        },
+        "ServicesDbStaging": {
+            "type": "string"
+        },
+        "ClientDbStaging": {
+            "type": "string"
+        },
+        "ClientSku": {
+            "type": "string"
+        },
+        "ServicesSku": {
+            "type": "string"
+        },
+        "LogsSku": {
+            "type": "string"
+        },
+        "Tag_Costcode": {
+            "type": "string"
+        },
+        "Tag_Environment": {
+            "type": "string"
+        },
+        "Tag_Product": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "SqlServiceObjective": "Standard",
+        "SqlEdition": "Standard"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Sql/servers",
+            "kind": "v12.0",
+            "name": "[parameters('SqlServer_Primary')]",
+            "apiVersion": "2014-04-01",
+            "location": "[parameters('Location_Primary')]",
+            "tags": {
+                "costcode": "[parameters('Tag_Costcode')]",
+                "environment": "[parameters('Tag_Environment')]",
+                "product": "[parameters('Tag_Product')]"
+            },
+            "properties": {
+                "administratorLogin": "[parameters('SqlAdmin_Username')]",
+                "administratorLoginPassword": "[parameters('SqlAdmin_Password')]",
+                "version": "12.0"
+            },
+            "resources": [
+                {
+                    "apiVersion": "2015-05-01-preview",
+                    "type": "failoverGroups",
+                    "name": "[parameters('SqlFailOverGroup')]",
+                    "properties": {
+                        "serverName": "[parameters('SqlServer_Primary')]",
+                        "partnerServers": [
+                            {
+                                "id": "[resourceId('Microsoft.Sql/servers/', parameters('SqlServer_Secondary'))]"
+                            }
+                        ],
+                        "readWriteEndpoint": {
+                            "failoverPolicy": "Automatic",
+                            "failoverWithDataLossGracePeriodMinutes": 60
+                        },
+                        "readOnlyEndpoint": {
+                            "failoverPolicy": "Disabled"
+                        },
+                        "databases": [
+                            "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('LogsDb'))]",
+                            "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('ServicesDb'))]",
+                            "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('ClientDb'))]",
+                            "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('LogsDbStaging'))]",
+                            "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('ServicesDbStaging'))]",
+                            "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('ClientDbStaging'))]"
+                        ]
+                    },
+                    "dependsOn": [
+                        "[parameters('SqlServer_Primary')]",
+                        "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('LogsDb'))]",
+                        "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('ServicesDb'))]",
+                        "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('ClientDb'))]",
+                        "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('LogsDbStaging'))]",
+                        "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('ServicesDbStaging'))]",
+                        "[resourceId('Microsoft.Sql/servers/databases', parameters('SqlServer_Primary'), parameters('ClientDbStaging'))]",
+                        "[resourceId('Microsoft.Sql/servers', parameters('SqlServer_Secondary'))]"
+                    ]
+                },
+                {
+                    "name": "[parameters('LogsDb')]",
+                    "type": "databases",
+                    "apiVersion": "2017-10-01-preview",
+                    "location": "[parameters('Location_Primary')]",
+                    "tags": {
+                        "costcode": "[parameters('Tag_Costcode')]",
+                        "environment": "[parameters('Tag_Environment')]",
+                        "product": "[parameters('Tag_Product')]"
+                    },
+                    "dependsOn": [
+                        "[parameters('SqlServer_Primary')]"
+                    ],
+                    "sku": {
+                        "name": "[parameters('LogsSku')]"
+                    },
+                    "properties": {
+                        "edition": "[variables('SqlEdition')]",
+                        "requestedServiceObjectiveName": "[variables('SqlServiceObjective')]"
+                    }
+                },
+                {
+                    "name": "[parameters('ServicesDb')]",
+                    "type": "databases",
+                    "apiVersion": "2017-10-01-preview",
+                    "location": "[parameters('Location_Primary')]",
+                    "tags": {
+                        "costcode": "[parameters('Tag_Costcode')]",
+                        "environment": "[parameters('Tag_Environment')]",
+                        "product": "[parameters('Tag_Product')]"
+                    },
+                    "dependsOn": [
+                        "[parameters('SqlServer_Primary')]"
+                    ],
+                    "sku": {
+                        "name": "[parameters('ServicesSku')]"
+                    },
+                    "properties": {
+                        "edition": "[variables('SqlEdition')]",
+                        "requestedServiceObjectiveName": "[variables('SqlServiceObjective')]"
+                    }
+                },
+                {
+                    "name": "[parameters('ClientDb')]",
+                    "type": "databases",
+                    "apiVersion": "2017-10-01-preview",
+                    "location": "[parameters('Location_Primary')]",
+                    "tags": {
+                        "costcode": "[parameters('Tag_Costcode')]",
+                        "environment": "[parameters('Tag_Environment')]",
+                        "product": "[parameters('Tag_Product')]"
+                    },
+                    "dependsOn": [
+                        "[parameters('SqlServer_Primary')]"
+                    ],
+                    "sku": {
+                        "name": "[parameters('ClientSku')]"
+                    },
+                    "properties": {
+                        "edition": "[variables('SqlEdition')]",
+                        "requestedServiceObjectiveName": "[variables('SqlServiceObjective')]"
+                    }
+                },
+                {
+                    "name": "[parameters('LogsDbStaging')]",
+                    "type": "databases",
+                    "apiVersion": "2017-10-01-preview",
+                    "location": "[parameters('Location_Primary')]",
+                    "tags": {
+                        "costcode": "[parameters('Tag_Costcode')]",
+                        "environment": "[parameters('Tag_Environment')]",
+                        "product": "[parameters('Tag_Product')]"
+                    },
+                    "dependsOn": [
+                        "[parameters('SqlServer_Primary')]"
+                    ],
+                    "sku": {
+                        "name": "[parameters('LogsSku')]"
+                    },
+                    "properties": {
+                        "edition": "[variables('SqlEdition')]",
+                        "requestedServiceObjectiveName": "[variables('SqlServiceObjective')]"
+                    }
+                },
+                {
+                    "name": "[parameters('ServicesDbStaging')]",
+                    "type": "databases",
+                    "apiVersion": "2017-10-01-preview",
+                    "location": "[parameters('Location_Primary')]",
+                    "tags": {
+                        "costcode": "[parameters('Tag_Costcode')]",
+                        "environment": "[parameters('Tag_Environment')]",
+                        "product": "[parameters('Tag_Product')]"
+                    },
+                    "dependsOn": [
+                        "[parameters('SqlServer_Primary')]"
+                    ],
+                    "sku": {
+                        "name": "[parameters('ServicesSku')]"
+                    },
+                    "properties": {
+                        "edition": "[variables('SqlEdition')]",
+                        "requestedServiceObjectiveName": "[variables('SqlServiceObjective')]"
+                    }
+                },
+                {
+                    "name": "[parameters('ClientDbStaging')]",
+                    "type": "databases",
+                    "apiVersion": "2017-10-01-preview",
+                    "location": "[parameters('Location_Primary')]",
+                    "tags": {
+                        "costcode": "[parameters('Tag_Costcode')]",
+                        "environment": "[parameters('Tag_Environment')]",
+                        "product": "[parameters('Tag_Product')]"
+                    },
+                    "dependsOn": [
+                        "[parameters('SqlServer_Primary')]"
+                    ],
+                    "sku": {
+                        "name": "[parameters('ClientSku')]"
+                    },
+                    "properties": {
+                        "edition": "[variables('SqlEdition')]",
+                        "requestedServiceObjectiveName": "[variables('SqlServiceObjective')]"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.Sql/servers",
+            "kind": "v12.0",
+            "name": "[parameters('SqlServer_Secondary')]",
+            "apiVersion": "2014-04-01",
+            "location": "[parameters('Location_Secondary')]",
+            "tags": {
+                "costcode": "[parameters('Tag_Costcode')]",
+                "environment": "[parameters('Tag_Environment')]",
+                "product": "[parameters('Tag_Product')]"
+            },
+            "properties": {
+                "administratorLogin": "[parameters('SqlAdmin_Username')]",
+                "administratorLoginPassword": "[parameters('SqlAdmin_Password')]",
+                "version": "12.0"
+            }
+        }
+    ]
+}
