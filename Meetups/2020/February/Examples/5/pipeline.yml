@@ -1,0 +1,61 @@
+name: Demo
+
+variables:
+- group: DemoCreds
+
+pool: Private
+
+steps:
+- pwsh: terraform init
+  name: init
+  displayName: Terraform Init
+  workingDirectory: tf
+  env:
+    ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+    ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+    ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+    ARM_TENANT_ID: $(ARM_TENANT_ID)
+    ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
+
+- pwsh: terraform plan -out=plan
+  name: plan
+  displayName: Terraform Plan
+  workingDirectory: tf
+  env:
+    ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+    ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+    ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+    ARM_TENANT_ID: $(ARM_TENANT_ID)
+    ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
+
+- pwsh: terraform apply -auto-approve plan
+  name: apply
+  displayName: Terraform Apply
+  workingDirectory: tf
+  env:
+    ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+    ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+    ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+    ARM_TENANT_ID: $(ARM_TENANT_ID)
+    ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
+
+- pwsh: $jsonData = (terraform output -json) | ConvertFrom-Json; Write-Host "##vso[task.setvariable variable=ResourceGroup]$($jsonData.ResourceGroup.value)"; Write-Host "##vso[task.setvariable variable=WebApp]$($jsonData.WebApp.value)";
+  name: output
+  displayName: Terraform Output
+  workingDirectory: tf
+  env:
+    ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+    ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+    ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+    ARM_TENANT_ID: $(ARM_TENANT_ID)
+    ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
+
+- task: AzureRmWebAppDeployment@4
+  name: app_deploy
+  displayName: WebApp Deploy
+  inputs:
+    azureSubscription: Azure (05096dba-7017-4377-aedc-495aa484cc74)
+    WebAppName: $(WebApp)
+    ResourceGroupName: $(ResourceGroup)
+    SlotName: production
+    packageForLinux: site
